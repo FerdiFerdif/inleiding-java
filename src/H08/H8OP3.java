@@ -1,26 +1,43 @@
 import java.awt.*;
 import java.applet.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class H8OP3 extends Applet {
-    Button knop;
+    TextField tekstveld;
     Label label;
-    TextField tekstvak;
+    Button knop;
+    String prijs;
+    double getal;
+    double a;
 
     public void init() {
-        tekstvak = new TextField("200 - 21% Belasting", 20);
-        label = new Label("BTW ");
-        add(label);
-        add(tekstvak);
-        knop = new Button();
-        knop.setLabel( "Ok");  //Ok...//
-        add(knop);
-
+        setSize(600, 300);
+    tekstveld = new TextField("",30);
+    label = new Label("Prijs exclusief BTW");
+    knop = new Button("Bereken");
+    knop.addActionListener(new BTWKNOP());
+    prijs = new String("");
+    add(label);
+    add(tekstveld);
+    add(knop);
+    a = 1.21;
     }
 
+    @Override
     public void paint(Graphics g) {
+        g.drawString("De prijs inclusief BTW is " + getal * a + " euro",50,60);
+    }
+
+    class BTWKNOP implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+        String prijs = tekstveld.getText();
+        getal = Double.parseDouble(prijs);
+
         repaint();
-        tekstvak = new TextField("$158");
 
 
+
+        }
     }
 }

@@ -2,43 +2,55 @@ import java.awt.*;
 import java.applet.*;
 import java.awt.event.*;
 
-public class H8OP1 extends Applet{
+public class H8OP1 extends Applet {
+    Button knop;
+    Button knop2;
     TextField tekstvak;
-    Button knop,knop2;
     Label label;
+    String schermtekst;
 
+    @Override
     public void init() {
-        tekstvak = new TextField("", 30);
-        knop = new Button("Ok");
-        knop2 = new Button("Reset");
-        knop.addActionListener(new KnopListener());
-        knop2.addActionListener(new KnopListener2());
+        setSize(600, 300);
+        schermtekst = "";
+        label = new Label("Klik op OK voor tekst, klik op reset om het te resetten");
+        tekstvak = new TextField("", 40);
+        knop = new Button("OK");
+        knop.addActionListener(new OK());
+        knop2 = new Button("RESET");
+        knop2.addActionListener(new RESET());
+        add(label);
         add(tekstvak);
         add(knop);
         add(knop2);
 
-        label = new Label("Type iets in het  tekstvakje");
-        add(label);
     }
 
+    @Override
     public void paint(Graphics g) {
-        g.drawString("Type een hele lange ... " +
-                "in het tekstvakje " +
-                "en klik op Ok", 50, 60);
+        g.drawString(schermtekst, 100, 100);
+
     }
 
-    class KnopListener implements ActionListener {
+    class OK implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            tekstvak.setText("Jammer, " +
-                    "maar nu staat er iets anders");
+            schermtekst = tekstvak.getText();
             repaint();
         }
-    }
-    class KnopListener2 implements ActionListener {
+
+
+
+        }
+    class RESET implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            tekstvak.setText(" " +
-                    "");
+            tekstvak.setText("");
+            schermtekst = tekstvak.getText();
             repaint();
         }
     }
 }
+
+
+
+
+
